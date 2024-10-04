@@ -1,0 +1,21 @@
+#you will need a sound to mount onto the player
+
+func audio_player_maker(player_name : String, sound : AudioStreamWAV, db : int = 0):
+	#insert playername, loud your sound, set your volume. 
+	var name: AudioStreamPlayer
+	
+	# Try to find an existing player by name
+	if has_node(player_name):
+		name = get_node(player_name)
+	else:
+		# If not found, create a new player
+		name = AudioStreamPlayer.new()
+		name.set_name(player_name)
+		add_child(name)
+	
+	# Set the properties of the player and play the sound
+	name.stream = sound
+	name.volume_db = db
+	name.play()
+	
+	return name
